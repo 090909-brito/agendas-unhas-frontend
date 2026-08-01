@@ -405,10 +405,12 @@ export default function App() {
   }
 
   function whatsappLink(b) {
-    const dateObj = new Date(b.date + "T00:00:00");
-    const dateLabel = `${dateObj.getDate()}/${dateObj.getMonth() + 1}`;
-    const msg = `Olá! Acabei de agendar um horário pelo app do ${SALON_NAME}:%0A%0AServiço: ${b.serviceName}%0AProfissional: ${b.professionalName}%0AData: ${dateLabel}%0AHorário: ${b.startTime}%0AValor: ${formatPrice(b.price)}%0A%0ANome: ${b.clientName}`;
-    return `https://wa.me/${SALON_WHATSAPP}?text=${msg}`;
+  const dateObj = new Date(b.date + "T00:00:00");
+  const dateLabel = ${dateObj.getDate()}/${dateObj.getMonth() + 1};
+  const msg = Olá! Acabei de agendar um horário pelo app do ${SALON_NAME}:%0A%0AServiço: ${b.serviceName}%0AProfissional: ${b.professionalName}%0AData: ${dateLabel}%0AHorário: ${b.startTime}%0AValor: ${formatPrice(b.price)}%0A%0ANome: ${b.clientName};
+  const prof = professionals.find((p) => p.id === b.professionalId);
+  const targetNumber = prof?.whatsapp || SALON_WHATSAPP;
+  return https://wa.me/${targetNumber}?text=${msg};
   }
 
   /* -------------------- render -------------------- */
