@@ -31,7 +31,7 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api"
 const OPEN_HOUR = 9; // horário de abertura
 const CLOSE_HOUR = 19; // horário de fechamento (último horário possível = CLOSE_HOUR - duração)
 const SLOT_STEP_MIN = 30; // granularidade dos horários exibidos
-const DAYS_AHEAD = 14; // quantos dias aparecem no carrossel de datas
+const DAYS_AHEAD = 365; // quantos dias aparecem no carrossel de datas
 
 const FALLBACK_PROFESSIONALS = [
   { id: "carol", name: "Carol", initials: "CA" },
