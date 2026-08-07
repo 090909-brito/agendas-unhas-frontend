@@ -1319,7 +1319,7 @@ function AdminPanel({ bookings, loading, onBack, onCancel, onRefresh, onAdjustDu
     byDate[b.date].push(b);
   });
 
-  const dataKeys = Object.keys(byDate).sort();
+  const dateKeys = Object.keys(byDate).sort();
 
   const totalRevenue = filteredBookings.reduce((sum, b) => sum + (b.price || 0), 0);
   const profShare = totalRevenue * 0.7;
