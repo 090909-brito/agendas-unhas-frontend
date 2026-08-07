@@ -1306,7 +1306,7 @@ function AdminPanel({ bookings, loading, onBack, onCancel, onRefresh, onAdjustDu
   }
 
  const filteredBookings = 
-   selectedProf === "all"? bookings : bookings.filter((b) => b.professionalId === selectProf);
+   selectedProf === "all"? bookings : bookings.filter((b) => b.professionalId === selectedProf);
 
   const sorted = [...filteredBookings].sort((a, b) => {
     if (a.date !== b.date) return a.date.localeCompare(b.date);
