@@ -248,7 +248,7 @@ export default function App() {
     for (let i= 0; i < firstWeekday; i++) cells.push(null);
     for (let d = 1; d <= daysInMonth; d++) cells.push(new Date(year, month, d));
     return cells;
-  }, [calendarMonth];
+  }, [calendarMonth]);
 
   const todayStart = new Date();
   todayStart.setHours(0, 0, 0, 0);
