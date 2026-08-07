@@ -1071,6 +1071,7 @@ export default function App() {
             onCancel={cancelBooking}
             onRefresh={loadBookings}
             onAdjustDuration={adjustBookingDuration}
+                professionals={professionals}
           />
         )}
       </div>
@@ -1261,10 +1262,11 @@ export default function App() {
 /*  PAINEL ADMIN                                                       */
 /* ------------------------------------------------------------------ */
 
-function AdminPanel({ bookings, loading, onBack, onCancel, onRefresh, onAdjustDuration }) {
+function AdminPanel({ bookings, loading, onBack, onCancel, onRefresh, onAdjustDuration, professionals }) {
   const [authed, setAuthed] = useState(false);
   const [pass, setPass] = useState("");
   const [error, setError] = useState(false);
+  const [selectedProf, setSelectedProf]= useState("all");
 
   function tryLogin() {
     if (pass === ADMIN_PASSCODE) {
@@ -1303,7 +1305,10 @@ function AdminPanel({ bookings, loading, onBack, onCancel, onRefresh, onAdjustDu
     );
   }
 
-  const sorted = [...bookings].sort((a, b) => {
+ const filteredBookings = 
+   selectedProf === "all"? bookings : bookings.filter((b) => b.professionalId === selectProf);
+
+  const sorted = [...filteredBookings].sort((a, b) => {
     if (a.date !== b.date) return a.date.localeCompare(b.date);
     return a.startTime.localeCompare(b.startTime);
   });
@@ -1314,7 +1319,10 @@ function AdminPanel({ bookings, loading, onBack, onCancel, onRefresh, onAdjustDu
     byDate[b.date].push(b);
   });
 
-  const dateKeys = Object.keys(byDate).sort();
+  const dataKeys = Object.keys(byDate).sort();
+
+  const totalRevenue = filteredBookings.reduce((sum, b) => sum + (b.price || 0), 0);
+  const profShare = totalRevenue * 0.7;
 
   return (
     <div style={{ minHeight: "100vh", background: "var(--ink)" }}>
