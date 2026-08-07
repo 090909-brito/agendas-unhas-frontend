@@ -1336,6 +1336,45 @@ function AdminPanel({ bookings, loading, onBack, onCancel, onRefresh, onAdjustDu
         </button>
         <div className="brand-name" style={{ color: "#fff" }}>Agenda completa</div>
       </div>
+      <div style={{ padding: "16px 20px 0", display: "flex", gap: 8, overflowX: "auto" }}>
+        <button
+          onClick={() => setSelectedProf("all")}
+          className="cat-pill"
+          style={
+            selectedProf === "all"
+              ? { background: "var(--wine)", borderColor: "var(--wine)", color: "#fff" }
+              : { background: "rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.18)", color: "#fff" }
+          }
+        >
+          Todas
+        </button>
+        {professionals.map((p) => (
+          <button
+            key={p.id}
+            onClick={() => setSelectedProf(p.id)}
+            className="cat-pill"
+            style={
+              selectedProf === p.id
+                ? { background: "var(--wine)", borderColor: "var(--wine)", color: "#fff" }
+                : { background: "rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.18)", color: "#fff" }
+            }
+          >
+            {p.name}
+          </button>
+        ))}
+      </div>
+      {selectedProf !== "all" && (
+        <div style={{ margin: "16px 20px 0", background: "rgba(255,255,255,0.06)", borderRadius: 14, padding: "14px 16px" }}>
+          <div style={{ color: "rgba(255,255,255,0.6)", fontSize: 12.5 }}>Faturamento acumulado (70%)</div>
+          <div style={{ color: "var(--gold)", fontSize: 22, fontWeight: 600, fontFamily: "'Fraunces', serif" }}>
+            {formatPrice(profShare)}
+          </div>
+          <div style={{ color: "rgba(255,255,255,0.4)", fontSize: 11.5, marginTop: 2 }}>
+            Total bruto: {formatPrice(totalRevenue)}
+          </div>
+        </div>
+      )}
+      <div className="admin-body">
       <div className="admin-body">
         {loading && <div style={{ color: "rgba(255,255,255,0.6)" }}>Carregando...</div>}
         {!loading && dateKeys.length === 0 && (
