@@ -151,6 +151,7 @@ export default function App() {
   const [bookingService, setBookingService] = useState(null); // objeto serviço ou null
   const [step, setStep] = useState(1); // 1 data/prof, 2 horário, 3 dados, 4 confirmado
   const [selectedDate, setSelectedDate] = useState(fmtDateKey(new Date()));
+  const [calendarMonth, setCalendarMonth] = useState(() => { const d = new Date(); d.setDate(1); return d; });
   const [selectedProf, setSelectedProf] = useState(null); // 'carol' | 'suelen' | 'none'
   const [selectedTime, setSelectedTime] = useState(null);
   const [clientName, setClientName] = useState("");
@@ -236,6 +237,24 @@ export default function App() {
     }
     return arr;
   }, []);
+
+
+  const monthGrid = useMemo(() => {
+    const year = calendarMonth.getFullYear();
+    const month = calendarMonth.getMonth();
+    const firstWeekday = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const cells = [];
+    for (let i= 0; i < firstWeekday; i++) cells.push(null);
+    for (let d = 1; d <= daysInMonth; d++) cells.push(new Date(year, month, d));
+    return cells;
+  }, [calendarMonth];
+
+  const todayStart = new Date();
+  todayStart.setHours(0, 0, 0, 0);
+
+  const isCurrentMonth = 
+    calendarMonth.getFullYear() === todayStart.getFullYear() && calendarMonth.getMonth() === todayStart.getMonth();
 
   /* -------------------- disponibilidade -------------------- */
 
