@@ -1375,7 +1375,6 @@ function AdminPanel({ bookings, loading, onBack, onCancel, onRefresh, onAdjustDu
         </div>
       )}
       <div className="admin-body">
-      <div className="admin-body">
         {loading && <div style={{ color: "rgba(255,255,255,0.6)" }}>Carregando...</div>}
         {!loading && dateKeys.length === 0 && (
           <div style={{ color: "rgba(255,255,255,0.6)", textAlign: "center", marginTop: 40 }}>
