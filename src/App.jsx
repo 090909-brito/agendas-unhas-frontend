@@ -1121,21 +1121,60 @@ export default function App() {
             {step === 1 && (
               <>
                 <div className="section-label">Selecione a data</div>
-                <div className="date-scroll">
-                  {dateOptions.map((d) => {
-                    const key = fmtDateKey(d);
-                    return (
-                      <div
-                        key={key}
-                        className={`date-chip ${selectedDate === key ? "active" : ""}`}
-                        onClick={() => setSelectedDate(key)}
-                      >
-                        <div className="num">{d.getDate()}</div>
-                        <div className="dow">{WEEKDAYS[d.getDay()].slice(0, 3)}</div>
-                      </div>
-                    );
-                  })}
-                </div>
+<div style={{ background: "var(--paper)", borderRadius: 16, padding: "12px 14px", border: "1px solid rgba(0,0,0,0.08)" }}>
+  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
+    <button
+      className="icon-btn"
+      disabled={isCurrentMonth}
+      onClick={() => setCalendarMonth((m) => { const d = new Date(m); d.setMonth(d.getMonth() - 1); return d; })}
+      style={{ opacity: isCurrentMonth ? 0.3 : 1 }}
+    >
+      <ArrowLeft size={16} />
+    </button>
+    <div style={{ fontWeight: 600, fontFamily: "'Fraunces', serif" }}>
+      {MONTHS[calendarMonth.getMonth()]} {calendarMonth.getFullYear()}
+    </div>
+    <button
+      className="icon-btn"
+      onClick={() => setCalendarMonth((m) => { const d = new Date(m); d.setMonth(d.getMonth() + 1); return d; })}
+    >
+      <ArrowLeft size={16} style={{ transform: "rotate(180deg)" }} />
+    </button>
+  </div>
+  <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 4, marginBottom: 4 }}>
+    {["D", "S", "T", "Q", "Q", "S", "S"].map((l, i) => (
+      <div key={i} style={{ textAlign: "center", fontSize: 11, color: "var(--muted)" }}>
+        {l}
+      </div>
+    ))}
+  </div>
+  <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 4 }}>
+    {monthGrid.map((d, i) => {
+      if (!d) return <div key={i} />;
+      const key = fmtDateKey(d);
+      const isPast = d < todayStart;
+      return (
+        <button
+          key={key}
+          disabled={isPast}
+          onClick={() => setSelectedDate(key)}
+          style={{
+            aspectRatio: "1",
+            borderRadius: 10,
+            border: "none",
+            fontSize: 13.5,
+            fontWeight: selectedDate === key ? 700 : 500,
+            background: selectedDate === key ? "var(--wine)" : "transparent",
+            color: isPast ? "rgba(0,0,0,0.25)" : selectedDate === key ? "#fff" : "var(--ink)",
+            cursor: isPast ? "default" : "pointer",
+          }}
+        >
+          {d.getDate()}
+        </button>
+      );
+    })}
+  </div>
+</div>
 
                 <div className="section-label">Profissional</div>
                 <div className="prof-row">
