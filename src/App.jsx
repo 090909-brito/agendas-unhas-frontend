@@ -16,6 +16,7 @@ import {
   Minus,
   MessageCircle,
 } from "lucide-react";
+import logoImg from "./Logo.jpg";
 
 /* ------------------------------------------------------------------ */
 /*  CONFIG — edite aqui                                               */
