@@ -1009,13 +1009,7 @@ export default function App() {
           <>
             <div className="header">
               <div className="brand-row">
-                <div className="brand-dot" style={{ overflow: "hidden", padding: 0}}>
-                  <img
-                    src={LogoImg}
-                    alt={SALON_NAME}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 30%", transformOrigin: "50% 30%", transform: "scale(1.8)" }}
-                    />
-                  <div>
+               <img src={LogoImg} alt={SALON_NAME} className="brand-dot" style={{ objectFit: "cover", objectPosition: "50% 25%" }} />
                 
                 <div>
                   <div className="brand-name">{SALON_NAME}</div>
