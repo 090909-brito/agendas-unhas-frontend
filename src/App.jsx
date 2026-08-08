@@ -1009,7 +1009,12 @@ export default function App() {
           <>
             <div className="header">
               <div className="brand-row">
-                <img src={LogoImg}  alt={SALON_NAME} className="brand-dot" style={{ objectFit: "cover", objectPosition: "50% 15%" }} />
+                <div className="brand-dot" style={{ overflow: "hidden", padding: 0}}>
+                  <img
+                    src={LogoImg}
+                    alt={SALON_NAME}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 30%", transformOrigin: "50% 30%" }}
+                    />
                 <div>
                   <div className="brand-name">{SALON_NAME}</div>
                   <div className="brand-sub">Carol &amp; Suelen · agende seu horário</div>
