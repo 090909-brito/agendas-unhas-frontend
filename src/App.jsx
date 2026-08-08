@@ -1016,7 +1016,7 @@ export default function App() {
                     style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 30%", transformOrigin: "50% 30%", transform: "scale(1.8)" }}
                     />
                   <div>
-                  </div>
+                
                 <div>
                   <div className="brand-name">{SALON_NAME}</div>
                   <div className="brand-sub">Carol &amp; Suelen · agende seu horário</div>
