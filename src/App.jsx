@@ -21,7 +21,7 @@ import {
 /*  CONFIG — edite aqui                                               */
 /* ------------------------------------------------------------------ */
 
-const SALON_NAME = "AgendaUnhas";
+const SALON_NAME = "Studio Fraga Cardoso";
 const SALON_WHATSAPP = "5551985238712"; // <-- troque pelo número real do salão (só dígitos, com DDI+DDD)
 const ADMIN_PASSCODE = "unhas2026"; // <-- troque pela senha do painel admin
 
