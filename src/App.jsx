@@ -440,16 +440,16 @@ export default function App() {
         @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap');
 
         .app-root {
-          --ink: #241626;
-          --ink-soft: #6b5a6c;
-          --paper: #FBF6F0;
-          --paper-card: #FFFFFF;
-          --wine: #8C1F3B;
-          --wine-dark: #6B1730;
-          --gold: #C7A252;
-          --plum: #5B3355;
-          --rose-mist: #F1E3DE;
-          --border: #EBDFD6;
+          --ink: #3A3630;
+          --ink-soft: #8A7F70;
+          --paper: #F3ECE0;
+          --paper-card: #FFFCF7;
+          --wine: #B8874B;
+          --wine-dark: #8F6636;
+          --gold: #C9A15A;
+          --plum: #6B5B4D;
+          --rose-mist: #EFE6D8;
+          --border: #E3D9C8;
           font-family: 'Work Sans', sans-serif;
           background: var(--paper);
           color: var(--ink);
