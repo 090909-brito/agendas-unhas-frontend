@@ -470,7 +470,9 @@ export default function App() {
           box-shadow: 0 0 40px rgba(140, 31, 59, 0.06);
         }
         .header {
-          background: linear-gradient(150deg, var(--wine) 0%, var(--wine-dark) 55%, var(--plum) 100%);
+          background: linear-gradient(rgba( 30, 20, 10, 0.55), rgba(30, 20, 10, 0.7)), url("./Logo.jpg);
+          background-size: cover;
+          background-position: center 25%;
           padding: 28px 20px 34px;
           position: relative;
           overflow: hidden;
