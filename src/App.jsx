@@ -1008,7 +1008,7 @@ export default function App() {
           <>
             <div className="header">
               <div className="brand-row">
-                <div className="brand-dot" />
+                <img src="/src/Logo.jpg" alt={SALON_NAME} className="brand-dot" style={{ objectFit: "cover" }} />
                 <div>
                   <div className="brand-name">{SALON_NAME}</div>
                   <div className="brand-sub">Carol &amp; Suelen · agende seu horário</div>
