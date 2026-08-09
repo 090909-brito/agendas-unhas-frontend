@@ -202,7 +202,7 @@ export default function App() {
             }, 300);
 
             return () => clearTimeout(timer);
-            }, [clientName];
+            }, [clientName]);
 
   
   /* -------------------- carregar / salvar agendamentos via API -------------------- */
