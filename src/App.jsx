@@ -157,7 +157,10 @@ export default function App() {
   const [selectedTime, setSelectedTime] = useState(null);
   const [clientName, setClientName] = useState("");
   const [clientPhone, setClientPhone] = useState("");
+  const [clientSuggestions, setClientSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const [lastBooking, setLastBooking] = useState(null);
+
 
   const [dayScrollStart, setDayScrollStart] = useState(0);
 
@@ -182,6 +185,26 @@ export default function App() {
     loadServices();
   }, []);
 
+     useEffect(() => {
+       if (clientName.trim().length <2) {
+         setClientSuggestions([]);
+         return;
+       }
+
+       const timer = setTieout(() => {
+         fetch(${API_BASE_URL}/clients/search?name=${encodeURIComponent(clientName)})`
+         .then((res) => res.json())
+         .then((data) => {
+            setClientSuggestions(data);
+            setShowSuggestions(true);
+            })
+            .catch((err) => console.error("Erro ao buscar clientes:", err));
+            }, 300);
+
+            return () => clearTimeout(timer);
+            }, [clientName];
+
+  
   /* -------------------- carregar / salvar agendamentos via API -------------------- */
 
   const loadBookings = useCallback(async () => {
