@@ -192,7 +192,7 @@ export default function App() {
        }
 
        const timer = setTieout(() => {
-         fetch(${API_BASE_URL}/clients/search?name=${encodeURIComponent(clientName)})`
+         fetch`(${API_BASE_URL}/clients/search?name=${encodeURIComponent(clientName)})`
          .then((res) => res.json())
          .then((data) => {
             setClientSuggestions(data);
