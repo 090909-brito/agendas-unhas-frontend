@@ -860,6 +860,38 @@ export default function App() {
           outline: none;
           color: var(--ink);
         }
+        .client-suggestion {
+          list-style: nome;
+          margin: 4px 0 0;
+          padding: 0;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: var(--paper-card);
+          border: 1.5px solid var(--border);
+          border-radius: 12px;
+          box-shadow: 0 6px 16px rgba(58, 54, 48, 0.15);
+          max-height: 220px;
+          overflow-y: auto;
+          z-index: 20;
+          }
+        .client-suggestions li {
+          padding: 10px 14px;
+          cursor: pointer;
+          font-size: 14px;
+          color: var(--ink);
+          border-bottom: nome;
+          }
+        .client-suggestions li:las-child {
+          border-bottom: none;
+          }
+        .client-suggestions li:hover {
+          background: var(--rose-mist);
+          color: var(--wine);
+          }
+
+          
         .form-field input:focus { border-color: var(--wine); }
         .summary-card {
           margin: 6px 20px 0;
