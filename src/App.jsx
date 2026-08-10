@@ -191,8 +191,8 @@ export default function App() {
          return;
        }
 
-       const timer = setTieout(() => {
-         fetch`(${API_BASE_URL}/clients/search?name=${encodeURIComponent(clientName)})`
+       const timer = setTimeout(() => {
+         fetch('${API_BASE_URL}/clients/search?name=${encodeURIComponent(clientName)}')
          .then((res) => res.json())
          .then((data) => {
             setClientSuggestions(data);
