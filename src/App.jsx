@@ -192,7 +192,7 @@ export default function App() {
        }
 
        const timer = setTimeout(() => {
-         fetch('${API_BASE_URL}/clients/search?name=${encodeURIComponent(clientName)}')
+         fetch(`${API_BASE_URL}/clients/search?name=${encodeURIComponent(clientName)}`)
          .then((res) => res.json())
          .then((data) => {
             setClientSuggestions(data);
@@ -1286,9 +1286,34 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="form-field">
+                <div className="form-field" style={{ position: "relative" }}>
                   <label>Seu nome</label>
-                  <input value={clientName} onChange={(e) => setClientName(e.target.value)} placeholder="Nome completo" />
+                  <input
+                    value={clientName}
+                    onChange={(e) => setClientName(e.target.value)}
+                    onFocus={() => clientSuggestions.length > 0 && setShowSuggestions(true)}
+                    onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
+                    placeholder="Nome completo"
+                    />
+                  {showSuggestions && clientSuggestions.length > 0 && (
+                    <ul className="client-suggestions">
+                      {clientSuggestions.map((client) => (
+                      <li
+                        key={client.id}
+                        onClick={() => {
+                          setClientName(client.name);
+                          setClientPhone(client.phone);
+                          setShowSuggestions(false);
+                        }}
+                        >
+                        {client.name} -- {client.phone}
+                      </li>
+                      ))}
+                    </ul>
+                )}
+                </div>
+
+                  
                 </div>
                 <div className="form-field">
                   <label>WhatsApp</label>
