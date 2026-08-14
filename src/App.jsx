@@ -1468,6 +1468,11 @@ async function deleteBlock(id) {
     console.error("Erro ao remover bloqueio:", e);
   }
 }
+  useEffect(() => {
+  if (blockDate) {
+    loadBlockedSlots(blockDate);
+  }
+}, [blockDate]);
   function tryLogin() {
     if (pass === ADMIN_PASSCODE) {
       setAuthed(true);
