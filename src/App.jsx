@@ -30,7 +30,7 @@ const ADMIN_PASSCODE = "unhas2026"; // <-- troque pela senha do painel admin
 // depois de hospedar o backend (Railway, Render, etc.), troque pelo link real ali no .env do frontend (VITE_API_URL).
 const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 const OPEN_HOUR = 8; // horário de abertura
-const CLOSE_HOUR = 18; // horário de fechamento (último horário possível = CLOSE_HOUR - duração)
+const CLOSE_HOUR = 19; // horário de fechamento (último horário possível = CLOSE_HOUR - duração)
 const SLOT_STEP_MIN = 30; // granularidade dos horários exibidos
 const DAYS_AHEAD = 365; // quantos dias aparecem no carrossel de datas
 
