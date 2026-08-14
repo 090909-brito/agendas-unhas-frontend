@@ -1407,7 +1407,67 @@ function AdminPanel({ bookings, loading, onBack, onCancel, onRefresh, onAdjustDu
   const [pass, setPass] = useState("");
   const [error, setError] = useState(false);
   const [selectedProf, setSelectedProf]= useState("all");
+  const [blockedSlots, setBlockedSlots] = useState([]);
+  const [blockDate, setBlockDate] = useState("");
+  const [blockProf, setBlockProf] = useState("");
+  const [blockType, setBlockType] = useState("allDay"); // "allDay" | "period" | "single"
+  const [blockStart, setBlockStart] = useState("");
+  const [blockEnd, setBlockEnd] = useState("");
+  const [blockReason, setBlockReason] = useState("");
+  async function loadBlockedSlots(date) {
+  if (!date) return;
+  try {
+    const res = await fetch(`${API_BASE_URL}/blocked-slots?date=${date}`);
+    if (!res.ok) throw new Error("Falha ao buscar bloqueios");
+    const data = await res.json();
+    setBlockedSlots(Array.isArray(data) ? data : []);
+  } catch (e) {
+    console.error("Erro ao buscar bloqueios:", e);
+  }
+}
 
+async function createBlock() {
+  if (!blockDate || !blockProf) {
+    alert("Escolha a data e a profissional.");
+    return;
+  }
+  if (blockType !== "allDay" && (!blockStart || !blockEnd)) {
+    alert("Preencha o horário de início e fim.");
+    return;
+  }
+  try {
+    const res = await fetch(`${API_BASE_URL}/blocked-slots`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        professionalId: blockProf,
+        date: blockDate,
+        startTime: blockType === "allDay" ? null : blockStart,
+        endTime: blockType === "allDay" ? null : blockEnd,
+        reason: blockReason,
+        allDay: blockType === "allDay",
+      }),
+    });
+    if (!res.ok) throw new Error("Falha ao criar bloqueio");
+    setBlockStart("");
+    setBlockEnd("");
+    setBlockReason("");
+    loadBlockedSlots(blockDate);
+  } catch (e) {
+    console.error("Erro ao criar bloqueio:", e);
+    alert("Erro ao criar bloqueio. Tente novamente.");
+  }
+}
+
+async function deleteBlock(id) {
+  try {
+    const res = await fetch(`${API_BASE_URL}/blocked-slots/${id}`, { method: "DELETE" });
+    if (!res.ok) throw new Error("Falha ao remover bloqueio");
+    loadBlockedSlots(blockDate);
+  } catch (e) {
+    console.error("Erro ao remover bloqueio:", e);
+  }
+}
   function tryLogin() {
     if (pass === ADMIN_PASSCODE) {
       setAuthed(true);
