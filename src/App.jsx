@@ -1426,6 +1426,7 @@ function AdminPanel({ bookings, loading, onBack, onCancel, onRefresh, onAdjustDu
   const [blockStart, setBlockStart] = useState("");
   const [blockEnd, setBlockEnd] = useState("");
   const [blockReason, setBlockReason] = useState("");
+  const [dateBlockedSlots, setDateBlockedSlots] = useState([]);
   async function loadBlockedSlots(date) {
   if (!date) return;
   try {
