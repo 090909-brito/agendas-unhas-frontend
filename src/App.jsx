@@ -1579,6 +1579,101 @@ async function deleteBlock(id) {
           </div>
         </div>
       )}
+      <div style={{ margin: "16px 20px", background: "var(--paper-card)", borderRadius: 14, padding: "14px 16px", border: "1.5px solid var(--border)" }}>
+  <div style={{ color: "var(--ink)", fontSize: 14, fontWeight: 600, marginBottom: 10 }}>
+    Bloquear horário
+  </div>
+
+  <input
+    type="date"
+    value={blockDate}
+    onChange={(e) => setBlockDate(e.target.value)}
+    style={{ width: "100%", padding: "8px 10px", borderRadius: 10, border: "1.5px solid var(--border)", marginBottom: 8 }}
+  />
+
+  <select
+    value={blockProf}
+    onChange={(e) => setBlockProf(e.target.value)}
+    style={{ width: "100%", padding: "8px 10px", borderRadius: 10, border: "1.5px solid var(--border)", marginBottom: 8 }}
+  >
+    <option value="">Escolha a profissional</option>
+    {professionals.map((p) => (
+      <option key={p.id} value={p.id}>{p.name}</option>
+    ))}
+  </select>
+
+  <div style={{ display: "flex", gap: 6, marginBottom: 8 }}>
+    <button
+      onClick={() => setBlockType("allDay")}
+      style={{ flex: 1, padding: "6px 0", borderRadius: 8, border: "1.5px solid var(--border)", background: blockType === "allDay" ? "var(--wine)" : "transparent", color: blockType === "allDay" ? "#fff" : "var(--ink)" }}
+    >
+      Dia inteiro
+    </button>
+    <button
+      onClick={() => setBlockType("period")}
+      style={{ flex: 1, padding: "6px 0", borderRadius: 8, border: "1.5px solid var(--border)", background: blockType === "period" ? "var(--wine)" : "transparent", color: blockType === "period" ? "#fff" : "var(--ink)" }}
+    >
+      Período
+    </button>
+    <button
+      onClick={() => setBlockType("single")}
+      style={{ flex: 1, padding: "6px 0", borderRadius: 8, border: "1.5px solid var(--border)", background: blockType === "single" ? "var(--wine)" : "transparent", color: blockType === "single" ? "#fff" : "var(--ink)" }}
+    >
+      Horário único
+    </button>
+  </div>
+
+  {blockType !== "allDay" && (
+    <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
+      <input
+        type="time"
+        value={blockStart}
+        onChange={(e) => setBlockStart(e.target.value)}
+        style={{ flex: 1, padding: "8px 10px", borderRadius: 10, border: "1.5px solid var(--border)" }}
+      />
+      {blockType === "period" && (
+        <input
+          type="time"
+          value={blockEnd}
+          onChange={(e) => setBlockEnd(e.target.value)}
+          style={{ flex: 1, padding: "8px 10px", borderRadius: 10, border: "1.5px solid var(--border)" }}
+        />
+      )}
+    </div>
+  )}
+
+  <input
+    type="text"
+    placeholder="Motivo (opcional)"
+    value={blockReason}
+    onChange={(e) => setBlockReason(e.target.value)}
+    style={{ width: "100%", padding: "8px 10px", borderRadius: 10, border: "1.5px solid var(--border)", marginBottom: 10 }}
+  />
+
+  <button className="btn-primary" onClick={createBlock} style={{ width: "100%" }}>
+    Bloquear
+  </button>
+
+  {blockedSlots.length > 0 && (
+    <div style={{ marginTop: 14 }}>
+      <div style={{ color: "var(--ink-soft)", fontSize: 12.5, marginBottom: 6 }}>
+        Bloqueios em {blockDate}:
+      </div>
+      {blockedSlots.map((bs) => (
+        <div key={bs.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "6px 0", borderBottom: "1px solid var(--border)" }}>
+          <span style={{ fontSize: 13.5, color: "var(--ink)" }}>
+            {professionals.find((p) => p.id === bs.professionalId)?.name || bs.professionalId} —{" "}
+            {bs.allDay ? "Dia inteiro" : `${bs.startTime} às ${bs.endTime}`}
+            {bs.reason ? ` (${bs.reason})` : ""}
+          </span>
+          <button onClick={() => deleteBlock(bs.id)} style={{ background: "none", border: "none", color: "var(--wine)", cursor: "pointer", fontSize: 13 }}>
+            Remover
+          </button>
+        </div>
+      ))}
+    </div>
+  )}
+</div>
       <div className="admin-body">
         {loading && <div style={{ color: "rgba(255,255,255,0.6)" }}>Carregando...</div>}
         {!loading && dateKeys.length === 0 && (
