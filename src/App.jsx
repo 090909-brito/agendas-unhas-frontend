@@ -299,12 +299,26 @@ export default function App() {
   }
 
   function isRangeFree(profId, dateKey, startMin, endMin) {
-    const existing = getBookingsFor(profId, dateKey);
-    return existing.every((b) => {
-      const bStart = hhmmToMinutes(b.startTime);
-      const bEnd = hhmmToMinutes(b.endTime);
-      return endMin <= bStart || startMin >= bEnd;
-    });
+  const existing = getBookingsFor(profId, dateKey);
+  const freeFromBookings = existing.every((b) => {
+    const bStart = hhmmToMinutes(b.startTime);
+    const bEnd = hhmmToMinutes(b.endTime);
+    return endMin <= bStart || startMin >= bEnd;
+  });
+
+  if (!freeFromBookings) return false;
+
+  const relevantBlocks = dateBlockedSlots.filter(
+    (bs) => bs.professionalId === profId && bs.date === dateKey
+  );
+
+  const freeFromBlocks = relevantBlocks.every((bs) => {
+    const blStart = hhmmToMinutes(bs.startTime);
+    const blEnd = hhmmToMinutes(bs.endTime);
+    return endMin <= blStart || startMin >= blEnd;
+  });
+
+  return freeFromBlocks;
   }
 
   function availableSlots(profId, dateKey, durationMin) {
