@@ -184,7 +184,19 @@ export default function App() {
     }
     loadServices();
   }, []);
-
+   useEffect(() => {
+  async function loadDateBlocks() {
+    try {
+      const res = await fetch(`${API_BASE_URL}/blocked-slots?date=${selectedDate}`);
+      if (!res.ok) throw new Error("Falha ao buscar bloqueios");
+      const data = await res.json();
+      setDateBlockedSlots(Array.isArray(data) ? data : []);
+    } catch (e) {
+      console.error("Erro ao buscar bloqueios:", e);
+    }
+  }
+  if (selectedDate) loadDateBlocks();
+}, [selectedDate]);
      useEffect(() => {
        if (clientName.trim().length <2) {
          setClientSuggestions([]);
