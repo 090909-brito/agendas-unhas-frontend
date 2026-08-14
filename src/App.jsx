@@ -160,6 +160,7 @@ export default function App() {
   const [clientSuggestions, setClientSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [lastBooking, setLastBooking] = useState(null);
+  const [dateBlockedSlots, setDateBlockedSlots] = useState([]);
 
 
   const [dayScrollStart, setDayScrollStart] = useState(0);
@@ -1440,7 +1441,7 @@ function AdminPanel({ bookings, loading, onBack, onCancel, onRefresh, onAdjustDu
   const [blockStart, setBlockStart] = useState("");
   const [blockEnd, setBlockEnd] = useState("");
   const [blockReason, setBlockReason] = useState("");
-  const [dateBlockedSlots, setDateBlockedSlots] = useState([]);
+  
   async function loadBlockedSlots(date) {
   if (!date) return;
   try {
