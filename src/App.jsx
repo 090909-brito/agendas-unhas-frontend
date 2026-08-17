@@ -270,6 +270,7 @@ export default function App() {
     for (let i = 0; i < DAYS_AHEAD; i++) {
       const d = new Date(today);
       d.setDate(today.getDate() + i);
+      if (d.getDay() === 1) continue; // pula segundas-feiras //
       arr.push(d);
     }
     return arr;
@@ -1237,10 +1238,11 @@ export default function App() {
       if (!d) return <div key={i} />;
       const key = fmtDateKey(d);
       const isPast = d < todayStart;
+      const isMonday = d.getDay() === 1;
       return (
         <button
           key={key}
-          disabled={isPast}
+          disabled={isPast || isMonday}
           onClick={() => setSelectedDate(key)}
           style={{
             aspectRatio: "1",
@@ -1249,8 +1251,8 @@ export default function App() {
             fontSize: 13.5,
             fontWeight: selectedDate === key ? 700 : 500,
             background: selectedDate === key ? "var(--wine)" : "transparent",
-            color: isPast ? "rgba(0,0,0,0.25)" : selectedDate === key ? "#fff" : "var(--ink)",
-            cursor: isPast ? "default" : "pointer",
+            color: (isPast || isMonday) ? "rgba(0,0,0,0.25)" : selectedDate === key ? "#fff" : "var(--ink)",
+            cursor: (isPast || isMonday) ? "default" : "pointer",
           }}
         >
           {d.getDate()}
