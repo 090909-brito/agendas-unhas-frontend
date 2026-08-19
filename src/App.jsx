@@ -1473,7 +1473,7 @@ function AdminPanel({ bookings, loading, onBack, onCancel, onRefresh, onAdjustDu
       const res = await fetch(`${API_BASE_URL}/clients`,{
       method: "POST",
       headers: {"Content-Type": "application/json" },
-      body: JSON.stringify({name: newClientName, phone: newClientPhone});
+      body: JSON.stringify({name: newClientName, phone: newClientPhone}),
     });
     if (!res.ok) {
       const data = await res.json().catch(() => ({}));
