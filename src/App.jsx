@@ -1569,7 +1569,36 @@ async function deleteBlock(id) {
           <button className="icon-btn" onClick={onBack} style={{ background: "rgba(255,255,255,0.1)", border: "none", color: "#fff" }}>
             <ArrowLeft size={17} />
           </button>
-          <div className="brand-name" style={{ color: "#fff" }}>Painel da profissional</div>
+          <div style={{ display: "flex", gap: 6 }}>
+  <button
+    onClick={() => setAdminTab("agenda")}
+    style={{
+      padding: "6px 14px",
+      borderRadius: 20,
+      border: "none",
+      background: adminTab === "agenda" ? "#fff" : "rgba(255,255,255,0.15)",
+      color: adminTab === "agenda" ? "var(--wine)" : "#fff",
+      fontWeight: 600,
+      fontSize: 13,
+    }}
+  >
+    Agenda
+  </button>
+  <button
+    onClick={() => setAdminTab("clientes")}
+    style={{
+      padding: "6px 14px",
+      borderRadius: 20,
+      border: "none",
+      background: adminTab === "clientes" ? "#fff" : "rgba(255,255,255,0.15)",
+      color: adminTab === "clientes" ? "var(--wine)" : "#fff",
+      fontWeight: 600,
+      fontSize: 13,
+    }}
+  >
+    Clientes
+  </button>
+</div>
         </div>
         <div className="passcode-box">
           <ShieldCheck size={30} color="var(--wine)" />
