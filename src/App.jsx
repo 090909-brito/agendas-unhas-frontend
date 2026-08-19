@@ -1453,7 +1453,7 @@ function AdminPanel({ bookings, loading, onBack, onCancel, onRefresh, onAdjustDu
   async function loadClients() {
     setLoadingClients(true);
     try {
-      const res = await fetch(${API_BASE_URL}/clients)`;
+      const res = await fetch(`${API_BASE_URL}/clients`);
       if (!res.ok) throw new Error("Falha ao buscar cliente");
       const data = await res.json();
       setClientsList(Array.isArray(data) ? data : []);
