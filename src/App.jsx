@@ -1443,6 +1443,56 @@ function AdminPanel({ bookings, loading, onBack, onCancel, onRefresh, onAdjustDu
   const [blockStart, setBlockStart] = useState("");
   const [blockEnd, setBlockEnd] = useState("");
   const [blockReason, setBlockReason] = useState("");
+  const [adminTab, setAdminTab] = useState("agenda");  //"agenda" | "clientes"
+  const [clientsList, setClientsList] = useState([]);
+  const [loadingClients, setLoadingClients] = useState(false);
+  const [clientSearch, setClientSearch] = useState("");
+  const [newClientName, setNewClientName] = useState("");
+  const [newClientFone, setNewclientFone] = useState("");
+
+  async function loadClients() {
+    setLoadingClients(true);
+    try {
+      const res = await fetch(${API_BASE_URL}/clients)`;
+      if (!res.ok) throw new Error("Falha ao buscar cliente");
+      const data = await res.json();
+      setClientsList(Array.isArray(data) ? data : []);
+    } catch (e) {
+      console.error("Erro ao buscar cliente", e);
+    } finally {
+      setLoadingClientes(false);
+    }
+  }
+
+  async function createClient() {
+    if (!newClientName.trim() || !newClientPhone.trim()) {
+      alert("Preencha nome e telefone");
+      return;
+    }
+    try {
+      const res = await fetch(`${API_BASE_URL}/clients`,{
+      method: "POST",
+      headers: {"Content-Type": "application/json" },
+      body: JSON.stringify({name: newClientName, phone: newClientPhone});
+    });
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error (data.error || "Falha ao cadastrar cliente");
+    }
+    setNewClientName("");
+    setNewClientPhone("");
+    loadClients();
+  } catch (e) {
+    console.error("Erro ao cadastrar cliente:", e);
+    alert(e.message || "Erro ao cadastrar cliente.");
+}
+}
+
+  useEffect(() => {
+    if (adminTab === "clientes") {
+      loadClients();
+    }
+  }, [adminTab]);
   
   async function loadBlockedSlots(date) {
   if (!date) return;
