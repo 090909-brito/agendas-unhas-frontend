@@ -1448,7 +1448,7 @@ function AdminPanel({ bookings, loading, onBack, onCancel, onRefresh, onAdjustDu
   const [loadingClients, setLoadingClients] = useState(false);
   const [clientSearch, setClientSearch] = useState("");
   const [newClientName, setNewClientName] = useState("");
-  const [newClientFone, setNewclientFone] = useState("");
+  const [newClientPhone, setNewClientPhone] = useState("");
 
   async function loadClients() {
     setLoadingClients(true);
