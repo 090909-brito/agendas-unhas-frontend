@@ -1874,6 +1874,7 @@ async function deleteBlock(id) {
         >
           Atualizar agenda
         </button>
+      </div>
       </>
         )}
   
