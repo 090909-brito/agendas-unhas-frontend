@@ -1874,7 +1874,68 @@ async function deleteBlock(id) {
           Atualizar agenda
         </button>
         )}
-        
+        {adminTab === "clientes" && (
+  <div style={{ padding: "16px 20px" }}>
+    <div style={{ background: "var(--paper-card)", borderRadius: 14, padding: "14px 16px", border: "1.5px solid var(--border)", marginBottom: 16 }}>
+      <div style={{ color: "var(--ink)", fontSize: 14, fontWeight: 600, marginBottom: 10 }}>
+        Cadastrar cliente
+      </div>
+      <input
+        type="text"
+        placeholder="Nome"
+        value={newClientName}
+        onChange={(e) => setNewClientName(e.target.value)}
+        style={{ width: "100%", padding: "8px 10px", borderRadius: 10, border: "1.5px solid var(--border)", marginBottom: 8 }}
+      />
+      <input
+        type="text"
+        placeholder="Telefone / WhatsApp"
+        value={newClientPhone}
+        onChange={(e) => setNewClientPhone(e.target.value)}
+        style={{ width: "100%", padding: "8px 10px", borderRadius: 10, border: "1.5px solid var(--border)", marginBottom: 10 }}
+      />
+      <button className="btn-primary" onClick={createClient} style={{ width: "100%" }}>
+        Cadastrar
+      </button>
+    </div>
+
+    <input
+      type="text"
+      placeholder="Buscar cliente..."
+      value={clientSearch}
+      onChange={(e) => setClientSearch(e.target.value)}
+      style={{ width: "100%", padding: "8px 10px", borderRadius: 10, border: "1.5px solid var(--border)", marginBottom: 12 }}
+    />
+
+    {loadingClients && (
+      <div style={{ color: "rgba(255,255,255,0.6)" }}>Carregando...</div>
+    )}
+
+    {!loadingClients && clientsList.length === 0 && (
+      <div style={{ color: "rgba(255,255,255,0.6)", textAlign: "center", marginTop: 40 }}>
+        Nenhuma cliente cadastrada ainda.
+      </div>
+    )}
+
+    {clientsList
+      .filter((c) => c.name.toLowerCase().includes(clientSearch.toLowerCase()))
+      .map((c) => (
+        <div
+          key={c.id}
+          style={{
+            background: "var(--paper-card)",
+            borderRadius: 12,
+            padding: "10px 14px",
+            marginBottom: 8,
+            border: "1.5px solid var(--border)",
+          }}
+        >
+          <div style={{ fontWeight: 600, color: "var(--ink)" }}>{c.name}</div>
+          <div style={{ fontSize: 13, color: "var(--ink-soft)" }}>{c.phone}</div>
+        </div>
+      ))}
+  </div>
+)}
       </div>
     </div>
   );
