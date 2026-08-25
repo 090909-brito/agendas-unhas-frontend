@@ -1940,7 +1940,7 @@ async function deleteBlock(id) {
       ))}
   </div>
 )}
-      </div>
+    
     </div>
   );
 }
