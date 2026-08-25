@@ -1679,6 +1679,7 @@ async function deleteBlock(id) {
   </button>
 </div>
       </div>
+    {adminTab === "agenda" && (
       <div style={{ padding: "16px 20px 0", display: "flex", gap: 8, overflowX: "auto" }}>
         <button
           onClick={() => setSelectedProf("all")}
@@ -1872,6 +1873,8 @@ async function deleteBlock(id) {
         >
           Atualizar agenda
         </button>
+        )}
+        
       </div>
     </div>
   );
