@@ -1707,9 +1707,9 @@ async function deleteBlock(id) {
         </div>
         <button
           onClick={goToNextDay}
-          style={{ background: "rgba(255,255,255,0.1)", border: "none", borderRadius: 10, padding: "8px 12px", color: "#fff" }}
-          {">"}
+          style={{ background: "rgba(255,255,255,0.1)", border: "none", borderRadius: 10, padding: "8px 12px", color: "#fff" }}      
         >
+          {">"}
         </button>
       </div>
 
