@@ -1699,6 +1699,7 @@ async function deleteBlock(id) {
           onClick={goToPrevDay}
           style={{ background: "rgba(255,255,255,0.1)", border: "none", borderRadius: 10, padding: "8px 12px", color: "#fff"}}
           >
+          {"<"}
         </button>
         <div style={{ color: "#fff", fontWeight: 600, fontSize: 16 }}>
           {WEEKDAYS[new Date(agendaDate + "T00:00:00").getDay()]},{" "}
@@ -1707,7 +1708,8 @@ async function deleteBlock(id) {
         <button
           onClick={goToNextDay}
           style={{ background: "rgba(255,255,255,0.1)", border: "none", borderRadius: 10, padding: "8px 12px", color: "#fff" }}
-          >
+          {">"}
+        >
         </button>
       </div>
 
