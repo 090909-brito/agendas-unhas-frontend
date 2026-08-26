@@ -1444,7 +1444,7 @@ function AdminPanel({ bookings, loading, onBack, onCancel, onRefresh, onAdjustDu
   const [blockEnd, setBlockEnd] = useState("");
   const [blockReason, setBlockReason] = useState("");
   const [adminTab, setAdminTab] = useState("agenda");  //"agenda" | "clientes"
-  const [agendaDate, setAgendaDate] = useState(fmtDataKey(new Date()));
+  const [agendaDate, setAgendaDate] = useState(fmtDateKey(new Date()));
   const [clientsList, setClientsList] = useState([]);
   const [loadingClients, setLoadingClients] = useState(false);
   const [clientSearch, setClientSearch] = useState("");
