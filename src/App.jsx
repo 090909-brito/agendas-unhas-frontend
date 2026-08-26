@@ -1444,11 +1444,24 @@ function AdminPanel({ bookings, loading, onBack, onCancel, onRefresh, onAdjustDu
   const [blockEnd, setBlockEnd] = useState("");
   const [blockReason, setBlockReason] = useState("");
   const [adminTab, setAdminTab] = useState("agenda");  //"agenda" | "clientes"
+  const [agendaDate, setAgendaDate] = useState(fmtDataKey(new Date()));
   const [clientsList, setClientsList] = useState([]);
   const [loadingClients, setLoadingClients] = useState(false);
   const [clientSearch, setClientSearch] = useState("");
   const [newClientName, setNewClientName] = useState("");
   const [newClientPhone, setNewClientPhone] = useState("");
+
+  function goToPrevDay() {
+    const d = new Date(agendaDate + "T00:00:00");
+    d.setDate(d.getDate() -1);
+    setAgendaDate(fmtDateKey(d));
+  }
+
+  function goToNextDay() {
+    const d = new Date(agendaDate + "T00:00:00");
+    d.setDate(d.getDate() +1);
+    setAgendaDate(fmtDateKey(d));
+  }
 
   async function loadClients() {
     setLoadingClients(true);
@@ -1681,44 +1694,24 @@ async function deleteBlock(id) {
       </div>
     {adminTab === "agenda" && (
       <>
-      <div style={{ padding: "16px 20px 0", display: "flex", gap: 8, overflowX: "auto" }}>
+      <div style={{ padding: "16px 20px 0", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12}}>
         <button
-          onClick={() => setSelectedProf("all")}
-          className="cat-pill"
-          style={
-            selectedProf === "all"
-              ? { background: "var(--wine)", borderColor: "var(--wine)", color: "#fff" }
-              : { background: "rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.18)", color: "#fff" }
-          }
-        >
-          Todas
-        </button>
-        {professionals.map((p) => (
-          <button
-            key={p.id}
-            onClick={() => setSelectedProf(p.id)}
-            className="cat-pill"
-            style={
-              selectedProf === p.id
-                ? { background: "var(--wine)", borderColor: "var(--wine)", color: "#fff" }
-                : { background: "rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.18)", color: "#fff" }
-            }
+          onClick={goToPrevDay}
+          style={{ background: "rgba(255,255,255,0.1)", border: "none", borderRadius: 10, padding: "8px 12px", color: "#fff"}}
           >
-            {p.name}
-          </button>
-        ))}
-      </div>
-      {selectedProf !== "all" && (
-        <div style={{ margin: "16px 20px 0", background: "rgba(255,255,255,0.06)", borderRadius: 14, padding: "14px 16px" }}>
-          <div style={{ color: "rgba(255,255,255,0.6)", fontSize: 12.5 }}>Faturamento acumulado (70%)</div>
-          <div style={{ color: "var(--gold)", fontSize: 22, fontWeight: 600, fontFamily: "'Fraunces', serif" }}>
-            {formatPrice(profShare)}
-          </div>
-          <div style={{ color: "rgba(255,255,255,0.4)", fontSize: 11.5, marginTop: 2 }}>
-            Total bruto: {formatPrice(totalRevenue)}
-          </div>
+        </button>
+        <div style={{ color: "var(--ink)", fontWeight: 600, fontSize: 16 }}>
+          {WEEKDAYS[new Date(agendaDate + "T00:00:00").getDay()]},{" "}
+          {new Date(agendaDate + "T00:00:00").getDate()}/{MONTHS[new Date(agendaDate + "T00:00:00").getMonth()]}
         </div>
-      )}
+        <button
+          onClick={goToNextDay}
+          style={{ background: "rgba(255,255,255,0.1)", border: "none", borderRadius: 10, padding: "8px 12px", color: "#fff" }}
+          >
+        </button>
+      </div>
+
+        
       <div style={{ margin: "16px 20px", background: "var(--paper-card)", borderRadius: 14, padding: "14px 16px", border: "1.5px solid var(--border)" }}>
   <div style={{ color: "var(--ink)", fontSize: 14, fontWeight: 600, marginBottom: 10 }}>
     Bloquear horário
