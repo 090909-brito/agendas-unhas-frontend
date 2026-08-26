@@ -1700,7 +1700,7 @@ async function deleteBlock(id) {
           style={{ background: "rgba(255,255,255,0.1)", border: "none", borderRadius: 10, padding: "8px 12px", color: "#fff"}}
           >
         </button>
-        <div style={{ color: "var(--ink)", fontWeight: 600, fontSize: 16 }}>
+        <div style={{ color: "#fff", fontWeight: 600, fontSize: 16 }}>
           {WEEKDAYS[new Date(agendaDate + "T00:00:00").getDay()]},{" "}
           {new Date(agendaDate + "T00:00:00").getDate()}/{MONTHS[new Date(agendaDate + "T00:00:00").getMonth()]}
         </div>
