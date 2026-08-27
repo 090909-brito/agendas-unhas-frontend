@@ -1238,7 +1238,7 @@ export default function App() {
       if (!d) return <div key={i} />;
       const key = fmtDateKey(d);
       const isPast = d < todayStart;
-      const isMonday = d.getDay() === 1;
+      const isMonday = d.getDay() === 1 || d.getDay() === 0;
       return (
         <button
           key={key}
