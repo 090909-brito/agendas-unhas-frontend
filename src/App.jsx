@@ -270,7 +270,7 @@ export default function App() {
     for (let i = 0; i < DAYS_AHEAD; i++) {
       const d = new Date(today);
       d.setDate(today.getDate() + i);
-      if (d.getDay() === 1) continue; // pula segundas-feiras //
+      if (d.getDay() === 1 || d.getDay() === 0) continue; // pula segundas-feiras e domingos//
       arr.push(d);
     }
     return arr;
