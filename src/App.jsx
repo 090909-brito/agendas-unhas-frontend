@@ -1239,6 +1239,10 @@ export default function App() {
       const key = fmtDateKey(d);
       const isPast = d < todayStart;
       const isMonday = d.getDay() === 1 || d.getDay() === 0;
+      const dayBookings= useMemo(
+        () => bookings.filter((b) => b.date === agendaDate),
+        [bookings, agendaDate]
+        );
       return (
         <button
           key={key}
