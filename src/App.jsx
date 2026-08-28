@@ -1839,12 +1839,44 @@ async function deleteBlock(id) {
         <div style={{ width: 56, flexShrink: 0, padding: "6px 8px", fontSize: 12, color: "var(--ink-soft)" }}>
           {String(hour).padStart(2, "0")}:00
         </div>
-        {professionals.map((p) => (
-          <div
-            key={p.id}
-            style={{ flex: 1, borderLeft: "1px solid var(--border)", position: "relative" }}
-          />
-        ))}
+      {professionals.map((p) => (
+  <div
+    key={p.id}
+    style={{ flex: 1, borderLeft: "1px solid var(--border)", position: "relative" }}
+  >
+    {hour === OPEN_HOUR &&
+      dayBookings
+        .filter((b) => b.professionalId === p.id)
+        .map((b) => {
+          const startMin = hhmmToMinutes(b.startTime);
+          const endMin = hhmmToMinutes(b.endTime);
+          const top = startMin - OPEN_HOUR * 60;
+          const height = endMin - startMin;
+          return (
+            <div
+              key={b.id}
+              style={{
+                position: "absolute",
+                top,
+                height,
+                left: 2,
+                right: 2,
+                background: "var(--wine)",
+                color: "#fff",
+                borderRadius: 6,
+                padding: "2px 6px",
+                fontSize: 11,
+                overflow: "hidden",
+                cursor: "pointer",
+              }}
+            >
+              <div style={{ fontWeight: 600 }}>{b.startTime} - {b.clientName}</div>
+              <div style={{ opacity: 0.85 }}>{b.serviceName}</div>
+            </div>
+          );
+        })}
+  </div>
+))}  
       </div>
     ))}
   </div>
