@@ -1816,52 +1816,35 @@ async function deleteBlock(id) {
             Nenhum agendamento ainda.
           </div>
         )}
-        {dateKeys.map((dk) => {
-          const d = new Date(dk + "T00:00:00");
-          return (
-            <div className="day-block" key={dk}>
-              <div className="day-block-title">
-                {WEEKDAYS[d.getDay()]}, {d.getDate()}/{MONTHS[d.getMonth()]}
-              </div>
-              {byDate[dk].map((b) => (
-                <div className="booking-row" key={b.id}>
-                  <div style={{ display: "flex", alignItems: "flex-start" }}>
-                    <div className="booking-time">{b.startTime}</div>
-                    <div className="booking-info">
-                      <div className="bname">
-                        {b.serviceName} — {b.clientName}
-                      </div>
-                      <div className="bmeta">
-                        {b.professionalName} · até {b.endTime} · {b.clientPhone}
-                      </div>
-                      <div className="duration-adjust">
-                        <button
-                          className="adj-btn"
-                          disabled={b.duration <= 15}
-                          onClick={() => onAdjustDuration(b.id, -15)}
-                          title="Diminuir 15 min"
-                        >
-                          <Minus size={12} />
-                        </button>
-                        <span className="adj-label">{formatDuration(b.duration)}</span>
-                        <button
-                          className="adj-btn"
-                          onClick={() => onAdjustDuration(b.id, 15)}
-                          title="Adicionar 15 min"
-                        >
-                          <Plus size={12} />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <button className="del-btn" onClick={() => onCancel(b.id)} title="Cancelar">
-                    <Trash2 size={16} />
-                  </button>
-                </div>
-              ))}
-            </div>
-          );
-        })}
+       <div style={{ margin: "16px 20px", border: "1.5px solid var(--border)", borderRadius: 14, overflow: "hidden" }}>
+  <div style={{ display: "flex", background: "var(--paper-card)", borderBottom: "1.5px solid var(--border)" }}>
+    <div style={{ width: 56, flexShrink: 0 }} />
+    {professionals.map((p) => (
+      <div
+        key={p.id}
+        style={{ flex: 1, textAlign: "center", padding: "10px 4px", fontWeight: 600, color: "var(--ink)", fontSize: 13.5 }}
+      >
+        {p.name}
+      </div>
+    ))}
+  </div>
+
+  <div style={{ maxHeight: 500, overflowY: "auto" }}>
+    {Array.from({ length: CLOSE_HOUR - OPEN_HOUR }, (_, i) => OPEN_HOUR + i).map((hour) => (
+      <div key={hour} style={{ display: "flex", borderBottom: "1px solid var(--border)", minHeight: 60 }}>
+        <div style={{ width: 56, flexShrink: 0, padding: "6px 8px", fontSize: 12, color: "var(--ink-soft)" }}>
+          {String(hour).padStart(2, "0")}:00
+        </div>
+        {professionals.map((p) => (
+          <div
+            key={p.id}
+            style={{ flex: 1, borderLeft: "1px solid var(--border)", position: "relative" }}
+          />
+        ))}
+      </div>
+    ))}
+  </div>
+</div> 
         <button
           className="link-btn"
           style={{ color: "rgba(255,255,255,0.5)", marginTop: 20 }}
