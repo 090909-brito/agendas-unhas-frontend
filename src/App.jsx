@@ -1451,6 +1451,7 @@ function AdminPanel({ bookings, loading, onBack, onCancel, onRefresh, onAdjustDu
   const [clientSearch, setClientSearch] = useState("");
   const [newClientName, setNewClientName] = useState("");
   const [newClientPhone, setNewClientPhone] = useState("");
+  const [expandedBookingId, setExpandedBookingId] = useState(null);
 
   function goToPrevDay() {
     const d = new Date(agendaDate + "T00:00:00");
