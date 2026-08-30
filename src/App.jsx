@@ -1903,9 +1903,7 @@ async function deleteBlock(id) {
     </div>
   )}
 </div>
-              <div style={{ fontWeight: 600 }}>{b.startTime} - {b.clientName}</div>
-              <div style={{ opacity: 0.85 }}>{b.serviceName}</div>
-            </div>
+        
           );
         })}
   </div>
