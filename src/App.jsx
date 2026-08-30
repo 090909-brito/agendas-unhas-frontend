@@ -1856,23 +1856,53 @@ async function deleteBlock(id) {
           const top = startMin - OPEN_HOUR * 60;
           const height = endMin - startMin;
           return (
-            <div
-              key={b.id}
-              style={{
-                position: "absolute",
-                top,
-                height,
-                left: 2,
-                right: 2,
-                background: "var(--wine)",
-                color: "#fff",
-                borderRadius: 6,
-                padding: "2px 6px",
-                fontSize: 11,
-                overflow: "hidden",
-                cursor: "pointer",
-              }}
-            >
+         <div
+  key={b.id}
+  onClick={() => setExpandedBookingId(expandedBookingId === b.id ? null : b.id)}
+  style={{
+    position: "absolute",
+    top,
+    height: expandedBookingId === b.id ? "auto" : height,
+    minHeight: height,
+    left: 2,
+    right: 2,
+    background: "var(--wine)",
+    color: "#fff",
+    borderRadius: 6,
+    padding: "2px 6px",
+    fontSize: 11,
+    overflow: expandedBookingId === b.id ? "visible" : "hidden",
+    cursor: "pointer",
+    zIndex: expandedBookingId === b.id ? 10 : 1,
+  }}
+>
+  <div style={{ fontWeight: 600 }}>{b.startTime} - {b.clientName}</div>
+  <div style={{ opacity: 0.85 }}>{b.serviceName}</div>
+
+  {expandedBookingId === b.id && (
+    <div style={{ display: "flex", gap: 6, marginTop: 4, alignItems: "center" }}>
+      <button
+        onClick={(e) => { e.stopPropagation(); onAdjustDuration(b.id, -15); }}
+        style={{ background: "rgba(255,255,255,0.2)", border: "none", borderRadius: 4, color: "#fff", padding: "2px 6px" }}
+      >
+        -15
+      </button>
+      <span>{formatDuration(b.duration)}</span>
+      <button
+        onClick={(e) => { e.stopPropagation(); onAdjustDuration(b.id, 15); }}
+        style={{ background: "rgba(255,255,255,0.2)", border: "none", borderRadius: 4, color: "#fff", padding: "2px 6px" }}
+      >
+        +15
+      </button>
+      <button
+        onClick={(e) => { e.stopPropagation(); onCancel(b.id); }}
+        style={{ background: "rgba(255,0,0,0.3)", border: "none", borderRadius: 4, color: "#fff", padding: "2px 6px", marginLeft: "auto" }}
+      >
+        Cancelar
+      </button>
+    </div>
+  )}
+</div>
               <div style={{ fontWeight: 600 }}>{b.startTime} - {b.clientName}</div>
               <div style={{ opacity: 0.85 }}>{b.serviceName}</div>
             </div>
